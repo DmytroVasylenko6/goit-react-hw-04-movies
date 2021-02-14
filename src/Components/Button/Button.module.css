@@ -27,6 +27,13 @@
   color: rgb(155, 155, 155);
   background-color: transparent;
   border: 0;
+  outline: none;
+  cursor: pointer;
+}
+
+.backButton:hover,
+.backButton:focus {
+  color: #0a34ee;
 }
 
 .backButton::before {

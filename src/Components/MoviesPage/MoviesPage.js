@@ -66,7 +66,7 @@ class MoviePage extends Component {
             )}
             {status === 'resolved' &&
               (movies.length > 0 ? (
-                <MoviesList movies={movies} location={location} />
+                <MoviesList movies={movies} />
               ) : (
                 <div>Not found</div>
               ))}

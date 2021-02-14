@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import s from './MoviesList.module.css';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 function MoviesList({ movies, location }) {
   return (
@@ -24,4 +24,4 @@ MoviesList.propTypes = {
   movies: PropTypes.array,
 };
 
-export default MoviesList;
+export default withRouter(MoviesList);

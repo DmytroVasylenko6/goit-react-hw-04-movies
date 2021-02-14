@@ -31,9 +31,7 @@ class HomePage extends Component {
             {status === 'pending' && (
               <Loader type="ThreeDots" color="#ca347f" height={80} width={80} />
             )}
-            {status === 'resolved' && (
-              <MoviesList movies={movies} location={location} />
-            )}
+            {status === 'resolved' && <MoviesList movies={movies} />}
           </Container>
         </Section>
       </div>
