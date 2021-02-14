@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.nav-link {
+  text-decoration: none;
+}
+
+.nav-link:not(:last-child) {
+  margin-right: 20px;
+}
