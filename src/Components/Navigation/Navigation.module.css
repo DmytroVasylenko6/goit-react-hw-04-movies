@@ -1,7 +1,12 @@
 .navLink {
   text-decoration: none;
+  color: #000000;
 }
 
 .navLink:not(:last-child) {
   margin-right: 20px;
+}
+
+.navLink.activeNavLink {
+  color: #061de6;
 }

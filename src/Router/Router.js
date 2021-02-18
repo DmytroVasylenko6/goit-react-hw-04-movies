@@ -1,17 +1,17 @@
 import React, { Suspense, lazy } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
-import Container from '../Components/Container';
+import Container from '../components/common/Container';
 
 const HomePage = lazy(() =>
-  import('../Components/HomePage' /* webpackChunkName: "home-page" */),
+  import('../pages/HomePage' /* webpackChunkName: "home-page" */),
 );
 const MoviePage = lazy(() =>
-  import('../Components/MoviesPage' /* webpackChunkName: "movie-page" */),
+  import('../pages/MoviesPage' /* webpackChunkName: "movie-page" */),
 );
 const MovieDetailsPage = lazy(() =>
   import(
-    '../Components/MovieDetailsPage' /* webpackChunkName: "movieDetails-page" */
+    '../pages/MovieDetailsPage' /* webpackChunkName: "movieDetails-page" */
   ),
 );
 

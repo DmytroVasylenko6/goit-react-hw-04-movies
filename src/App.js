@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Router from './Router';
-import AppBar from './Components/AppBar';
+import AppBar from './components/AppBar';
 
 const App = () => (
   <>

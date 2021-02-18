@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Loader from 'react-loader-spinner';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Container from '../Container';
-import SearchForm from '../Form';
-import Section from '../Section';
-import MoviesList from '../MoviesList';
-import getQueryParams from '../../Utils/get_query_params';
-import SearchMovieAPI from '../../Services/SearchMovieAPI';
+import Container from '../../components/common/Container';
+import SearchForm from '../../components/Form';
+import Section from '../../components/common/Section';
+import MoviesList from '../../components/MoviesList';
+import getQueryParams from '../../utils/get_query_params';
+import { SearchMovieAPI } from '../../services/MovieAPI';
 
 class MoviePage extends Component {
   state = {
@@ -45,7 +45,7 @@ class MoviePage extends Component {
     SearchMovieAPI(query)
       .then(response => {
         if (response.data.results.length === 0) {
-          alert('Not found');
+          toast('Not found');
         }
         this.setState({ movies: response.data.results, status: 'resolved' });
       })
@@ -59,6 +59,7 @@ class MoviePage extends Component {
     return (
       <>
         <Section>
+          <ToastContainer autoClose={3000} />
           <SearchForm onSubmit={this.handleSubmitForm} />
           <Container>
             {status === 'pending' && (

@@ -1,9 +1,9 @@
 import { React, Component } from 'react';
 import Loader from 'react-loader-spinner';
-import Section from '../Section';
-import Container from '../Container';
-import MoviesList from '../MoviesList';
-import getMovieTranding from '../../Services/getMovieTranding';
+import Section from '../../components/common/Section';
+import Container from '../../components/common/Container';
+import MoviesList from '../../components/MoviesList';
+import { getMovieTrendingAPI } from '../../services/MovieAPI';
 
 class HomePage extends Component {
   state = {
@@ -13,7 +13,7 @@ class HomePage extends Component {
 
   componentDidMount() {
     this.setState({ status: 'pending' });
-    getMovieTranding()
+    getMovieTrendingAPI()
       .then(response => {
         this.setState({ movies: response.data.results, status: 'resolved' });
       })

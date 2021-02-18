@@ -1,20 +1,16 @@
 import { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
 import s from './MovieDetailsPage.module.css';
-import image from '../images/unnamed.png';
-import Cast from '../Cast';
-import Reviews from '../Reviews';
-import Button from '../Button';
-import getMovieAPI from '../../Services/getMovieAPI';
-import getMovieCreditsAPI from '../../Services/getMovieCreditsAPI';
-import getMovieReviewsAPI from '../../Services/getMovieReviewsAPI';
+import image from '../../components/images/unnamed.png';
+import Cast from '../../components/Cast';
+import Reviews from '../../components/Reviews';
+import Button from '../../components/common/Button';
+import { getMovieAPI } from '../../services/MovieAPI';
 
 class MovieDetailsPage extends Component {
   state = {
     movie: [],
     genres: [],
-    credits: [],
-    reviews: [],
     error: '',
   };
 
@@ -26,33 +22,16 @@ class MovieDetailsPage extends Component {
         this.setState({ movie: response.data, genres: response.data.genres });
       })
       .catch(error => this.setState({ error }));
-
-    getMovieCreditsAPI(movieId)
-      .then(response => {
-        this.setState({ credits: response.data.cast });
-      })
-      .catch(error => this.setState({ error }));
-
-    getMovieReviewsAPI(movieId)
-      .then(response => {
-        this.setState({ reviews: response.data.results });
-      })
-      .catch(error => this.setState({ error }));
   }
 
   handleGoBack = () => {
     const { location, history } = this.props;
-    const { state } = location;
 
-    if (state && state.from) {
-      return history.push(state.from);
-    }
-
-    history.push('/');
+    history.push(location?.state?.from || '/');
   };
 
   render() {
-    const { movie, genres, credits, reviews } = this.state;
+    const { movie, genres } = this.state;
     const { poster_path, title, vote_average, overview } = movie;
     const { url, path } = this.props.match;
 
@@ -90,21 +69,29 @@ class MovieDetailsPage extends Component {
           <h2>Additional information</h2>
           <ul>
             <li>
-              <Link to={`${url}/credits`}>Cast</Link>
+              <Link
+                to={{
+                  pathname: `${url}/credits`,
+                  state: { from: this.props.location },
+                }}
+              >
+                Cast
+              </Link>
             </li>
             <li>
-              <Link to={`${url}/reviews`}>Reviews</Link>
+              <Link
+                to={{
+                  pathname: `${url}/reviews`,
+                  state: { from: this.props.location },
+                }}
+              >
+                Reviews
+              </Link>
             </li>
           </ul>
         </div>
-        <Route
-          path={`${path}/credits`}
-          render={props => <Cast {...props} array={credits} />}
-        />
-        <Route
-          path={`${path}/reviews`}
-          render={props => <Reviews {...props} array={reviews} />}
-        />
+        <Route path={`${path}/credits`} component={Cast} />
+        <Route path={`${path}/reviews`} component={Reviews} />
       </>
     );
   }

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import shortid from 'shortid';
-import Input from '../Input';
-import Button from '../Button';
+import Input from '../common/Input';
+import Button from '../common/Button';
 import s from './Form.module.css';
 
 class Form extends Component {
@@ -21,7 +21,7 @@ class Form extends Component {
   handleSubmit = e => {
     e.preventDefault();
     if (this.state.name.trim() === '') {
-      alert('Please enter something');
+      toast('Please enter something');
       return;
     }
     this.props.onSubmit(this.state);
